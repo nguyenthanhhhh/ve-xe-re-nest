@@ -3,9 +3,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Company_Vehicle_Entity } from '../company_vehicle/company_vehicle.entity';
 
 @Entity({ name: 'company' })
 export class CompanyEntity {
@@ -14,6 +16,15 @@ export class CompanyEntity {
 
   @Column({ nullable: false })
   public name: string;
+
+  @Column({ nullable: false })
+  public description: string;
+
+  @OneToMany(
+    () => Company_Vehicle_Entity,
+    (company_vehicle) => company_vehicle.companyId,
+  )
+  companyInf: Company_Vehicle_Entity;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   public createdAt: Date;

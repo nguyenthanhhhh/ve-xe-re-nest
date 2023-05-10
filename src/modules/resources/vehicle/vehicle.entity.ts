@@ -6,11 +6,13 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { TripEntity } from '../trips/trips.entity';
+import { Company_Vehicle_Entity } from '../company_vehicle/company_vehicle.entity';
 
 @Entity({ name: 'vehicle' })
 export class VehicleEntity {
@@ -23,6 +25,12 @@ export class VehicleEntity {
   @OneToOne(() => TripEntity)
   @JoinColumn()
   tripId: TripEntity;
+
+  @OneToMany(
+    () => Company_Vehicle_Entity,
+    (company_vehicle) => company_vehicle.vehicleId,
+  )
+  vehicleInf: Company_Vehicle_Entity;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   public createdAt: Date;

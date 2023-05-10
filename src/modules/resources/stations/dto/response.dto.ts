@@ -1,7 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class StationData {
+export class ResponseStationData {
+  @ApiProperty({ type: Number, required: true })
+  @IsNumber()
+  id: number;
+
   @ApiProperty({ type: String, required: true })
   @IsString()
   @IsNotEmpty()
@@ -22,7 +26,8 @@ export class StationData {
   @IsNotEmpty()
   avatar: string;
 
-  @ApiProperty({ type: String, readOnly: true })
+  @ApiProperty({ type: String })
+  @IsString()
   slug: string;
 
   @ApiProperty({ type: Date, readOnly: true })

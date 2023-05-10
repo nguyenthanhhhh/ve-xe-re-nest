@@ -7,6 +7,7 @@ import {
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
+  Unique,
   UpdateDateColumn,
 } from 'typeorm';
 import { TripEntity } from '../trips/trips.entity';
@@ -16,7 +17,7 @@ export class StationEntity {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, unique: true })
   public name: string;
 
   @Column({ nullable: false })
